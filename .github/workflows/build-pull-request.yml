@@ -1,4 +1,4 @@
-name: Build Pull Requests
+name: Build Pull Request
 on:
   push:
     branches: [main, dev]
