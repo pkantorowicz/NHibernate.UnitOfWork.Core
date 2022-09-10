@@ -57,7 +57,7 @@ jobs:
       - name: Test
         run: dotnet test src/NHibernate.UnitOfWork.Core.Tests/NHibernate.UnitOfWork.Core.Tests.csproj --no-restore --verbosity normal --logger "trx;LogFilePrefix=TestResults-${{ matrix.dotnet-version }}.trx" --results-directory "TestResults-${{ matrix.dotnet-version }}" /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
       - name: Analyze tests coverage
-      - uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v3
       - name: Upload dotnet test results
         uses: actions/upload-artifact@v2
         with:
