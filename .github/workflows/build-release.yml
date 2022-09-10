@@ -1,0 +1,54 @@
+name: Release build
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet-version: ["6.0.x"]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+          source-url: https://nuget.pkg.github.com/pkantorowicz/index.json
+        env:
+          NUGET_AUTH_TOKEN: ${{secrets.ACTION_GITHUB_TOKEN}}
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+      - name: Test
+        run: dotnet test --logger "trx;LogFilePrefix=TestResults-${{ matrix.dotnet-version }}.trx" --results-directory "TestResults-${{ matrix.dotnet-version }}"
+      - name: Upload dotnet test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: TestResults-${{ matrix.dotnet-version }}
+          path: TestResults-${{ matrix.dotnet-version }}
+        if: ${{ always() }}
+      - name: Tests report generation
+        uses: dorny/test-reporter@v1.5.0
+        if: success() || failure()
+        with:
+          name: TestResults-${{ matrix.dotnet-version }}
+          path: "**/*.trx"
+          reporter: dotnet-trx
+          list-tests: "failed"
+      - name: Pack 
+        run: dotnet pack --no-build --configuration Release src/NHibernate.UnitOfWork.Core/NHibernate.UnitOfWork.Core.csproj
+      - name: Push 
+        run: dotnet nuget push src/NHibernate.UnitOfWork.Core/bin/Release/*.nupkg --skip-duplicate --no-symbols
+      - name: Tag commit
+        uses: pkgdeps/git-tag-action@v2
+        with:
+          version: "0.1.0"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_repo: ${{ github.repository }}
+          git_commit_sha: ${{ github.sha }}
+          git_tag_prefix: "v"

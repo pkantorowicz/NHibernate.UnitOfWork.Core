@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{1935D3E0-BAF4-4AC0-B88B-575935C6741F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{29F51D02-C9B2-44BE-A7FF-0FD5CCA0A0BD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{506EF947-50C3-4BC5-98D3-1EF0B582ACAD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NHibernate.UnitOfWork.Core", "src\NHibernate.UnitOfWork.Core\NHibernate.UnitOfWork.Core.csproj", "{414A4B08-FA06-40C9-BCE7-136173CEF4D4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NHibernate.UnitOfWork.Core.Tests", "src\NHibernate.UnitOfWork.Core.Tests\NHibernate.UnitOfWork.Core.Tests.csproj", "{46274E65-A85C-4A7F-AA5F-2E491B41BA70}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{414A4B08-FA06-40C9-BCE7-136173CEF4D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{414A4B08-FA06-40C9-BCE7-136173CEF4D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{414A4B08-FA06-40C9-BCE7-136173CEF4D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{414A4B08-FA06-40C9-BCE7-136173CEF4D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46274E65-A85C-4A7F-AA5F-2E491B41BA70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46274E65-A85C-4A7F-AA5F-2E491B41BA70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46274E65-A85C-4A7F-AA5F-2E491B41BA70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46274E65-A85C-4A7F-AA5F-2E491B41BA70}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{414A4B08-FA06-40C9-BCE7-136173CEF4D4} = {29F51D02-C9B2-44BE-A7FF-0FD5CCA0A0BD}
+		{46274E65-A85C-4A7F-AA5F-2E491B41BA70} = {29F51D02-C9B2-44BE-A7FF-0FD5CCA0A0BD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2438C877-9D20-4DEE-9701-6EF16B672F66}
+	EndGlobalSection
+EndGlobal
