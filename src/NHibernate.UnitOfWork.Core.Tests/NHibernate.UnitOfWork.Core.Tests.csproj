@@ -24,4 +24,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\NHibernate.UnitOfWork.Core\NHibernate.UnitOfWork.Core.csproj" />
+  </ItemGroup>
+
 </Project>
