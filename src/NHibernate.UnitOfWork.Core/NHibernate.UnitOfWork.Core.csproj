@@ -2,8 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <ImplicitUsings>false</ImplicitUsings>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NHibernate" Version="5.3.13" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Transformers\" />
+    <Folder Include="Repositories\" />
+  </ItemGroup>
 
 </Project>
