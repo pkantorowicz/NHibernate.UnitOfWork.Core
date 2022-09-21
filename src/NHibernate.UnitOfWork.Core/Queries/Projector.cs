@@ -46,16 +46,19 @@ namespace NHibernate.UnitOfWork.Core.Queries
             {
                 ProjectionType.Avg => IsColumnOrAlias ? Projections.Avg(ColumnName) : Projections.Avg(AliasName),
                 ProjectionType.Count => IsColumnOrAlias ? Projections.Count(ColumnName) : Projections.Count(AliasName),
+                ProjectionType.CountDistinct => IsColumnOrAlias ? Projections.CountDistinct(ColumnName) : Projections.CountDistinct(AliasName),
+                ProjectionType.GroupProperty => IsColumnOrAlias ? Projections.GroupProperty(ColumnName) : Projections.GroupProperty(AliasName),
                 ProjectionType.Max => IsColumnOrAlias ? Projections.Max(ColumnName) : Projections.Max(AliasName),
                 ProjectionType.Min => IsColumnOrAlias ? Projections.Min(ColumnName) : Projections.Min(AliasName),
                 ProjectionType.RowCount => Projections.RowCount(),
+                ProjectionType.RowCountInt64 => Projections.RowCountInt64(),
                 ProjectionType.Sum => IsColumnOrAlias ? Projections.Sum(ColumnName) : Projections.Sum(AliasName),
                 ProjectionType.Property => IsColumnOrAlias ? Projections.Property(ColumnName) : Projections.Property(AliasName),
                 _ or ProjectionType.None => 
                     throw new UnsupportedProjectionException(
                         "Provided projection is unsupported.",
                         ProjectionType.ToString(),
-                        "102")
+                        ErrorCode.UsupportedProjection)
             };
         }
     }

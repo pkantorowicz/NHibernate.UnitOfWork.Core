@@ -1,4 +1,5 @@
 ﻿using NHibernate.Transform;
+using NHibernate.UnitOfWork.Core.Exceptions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,29 +13,39 @@ namespace NHibernate.UnitOfWork.Core.Queries.Transform
     {
         public object TransformTuple(object[] tuple, string[] aliases)
         {
-            var list = new List<string>(aliases);
-
-            var propertyAliases = new List<string>(list);
-            var complexAliases = new List<string>();
-
-            for (var i = 0; i < list.Count; i++)
+            try
             {
-                var alias = list[i];
+                var list = new List<string>(aliases);
 
-                if (!alias.Contains('.'))
-                    continue;
+                var propertyAliases = new List<string>(list);
+                var complexAliases = new List<string>();
 
-                complexAliases.Add(alias);
-                propertyAliases[i] = null;
+                for (var i = 0; i < list.Count; i++)
+                {
+                    var alias = list[i];
+
+                    if (!alias.Contains('.'))
+                        continue;
+
+                    complexAliases.Add(alias);
+                    propertyAliases[i] = null;
+                }
+
+                var result = Transformers
+                    .AliasToBean<TEntity>()
+                    .TransformTuple(tuple, propertyAliases.ToArray());
+
+                TransformPersistentChain(tuple, complexAliases, result, list);
+
+                return result;
             }
-
-            var result = Transformers
-                .AliasToBean<TEntity>()
-                .TransformTuple(tuple, propertyAliases.ToArray());
-
-            TransformPersistentChain(tuple, complexAliases, result, list);
-
-            return result;
+            catch (Exception exception)
+            {
+                throw new TransformException(
+                    $"Error occured when transforming entity: {typeof(TEntity).Name}.", 
+                    exception, 
+                    ErrorCode.TransformError);
+            }
         }
 
         public IList TransformList(IList collection)
@@ -44,7 +55,7 @@ namespace NHibernate.UnitOfWork.Core.Queries.Transform
             return results;
         }
 
-        #pragma warning disable S3011
+#pragma warning disable S3011
         private static void TransformPersistentChain(
             object[] tuple,
             List<string> complexAliases,
@@ -106,6 +117,6 @@ namespace NHibernate.UnitOfWork.Core.Queries.Transform
                 }
             }
         }
-        #pragma warning restore S3011 
+#pragma warning restore S3011
     }
 }

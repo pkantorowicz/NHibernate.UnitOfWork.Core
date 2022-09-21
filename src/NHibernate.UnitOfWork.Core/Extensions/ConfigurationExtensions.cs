@@ -124,7 +124,7 @@ namespace NHibernate.UnitOfWork.Core.Extensions
                     throw new UnsupportedDialectException(
                         "Provided dialect is unsupported.",
                         dialect,
-                        "101");
+                        ErrorCode.UnsupportedDialect);
             }
         }
     }

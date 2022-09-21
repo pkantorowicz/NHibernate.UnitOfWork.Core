@@ -2,14 +2,14 @@
 
 namespace NHibernate.UnitOfWork.Core.Exceptions
 {
-    internal class UnsupportedProjectionException : NHibernateException
+    public class UnsupportedProjectionException : NHibernateException
     {
-        public UnsupportedProjectionException(string message, string value, string code) : base(message, code)
+        internal UnsupportedProjectionException(string message, string value, ErrorCode code) : base(message, code)
         {
             Value = value;
         }
 
-        public UnsupportedProjectionException(string message, string value, Exception innerException, string code) : base(message, innerException, code)
+        internal UnsupportedProjectionException(string message, string value, Exception innerException, ErrorCode code) : base(message, innerException, code)
         {
             Value = value;
         }

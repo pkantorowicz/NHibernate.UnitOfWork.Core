@@ -2,14 +2,14 @@
 
 namespace NHibernate.UnitOfWork.Core.Exceptions
 {
-    internal class UnsupportedDialectException : NHibernateException
+    public class UnsupportedDialectException : NHibernateException
     {
-        public UnsupportedDialectException(string message, string value, string code) : base(message, code)
+        internal UnsupportedDialectException(string message, string value, ErrorCode code) : base(message, code)
         {
             Value = value;
         }
 
-        public UnsupportedDialectException(string message, string value, Exception innerException, string code) : base(message, innerException, code)
+        internal UnsupportedDialectException(string message, string value, Exception innerException, ErrorCode code) : base(message, innerException, code)
         {
             Value = value;
         }
